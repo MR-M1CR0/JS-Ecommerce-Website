@@ -1,0 +1,214 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 100,
+      "category": "Category A",
+      "image": "image_url_1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "category": "Category B",
+      "image": "image_url_2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 300,
+      "category": "Category C",
+      "image": "image_url_3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Product 4",
+      "price": 400,
+      "category": "Category D",
+      "image": "image_url_4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Product 5",
+      "price": 500,
+      "category": "Category E",
+      "image": "image_url_5.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Product 6",
+      "price": 600,
+      "category": "Category F",
+      "image": "image_url_6.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Product 7",
+      "price": 700,
+      "category": "Category G",
+      "image": "image_url_7.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Product 8",
+      "price": 800,
+      "category": "Category H",
+      "image": "image_url_8.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Product 9",
+      "price": 900,
+      "category": "Category I",
+      "image": "image_url_9.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Product 10",
+      "price": 1000,
+      "category": "Category J",
+      "image": "image_url_10.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Product 11",
+      "price": 1100,
+      "category": "Category A",
+      "image": "image_url_11.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Product 12",
+      "price": 1200,
+      "category": "Category B",
+      "image": "image_url_12.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Product 13",
+      "price": 1300,
+      "category": "Category C",
+      "image": "image_url_13.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Product 14",
+      "price": 1400,
+      "category": "Category D",
+      "image": "image_url_14.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Product 15",
+      "price": 1500,
+      "category": "Category E",
+      "image": "image_url_15.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Product 16",
+      "price": 1600,
+      "category": "Category F",
+      "image": "image_url_16.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Product 17",
+      "price": 1700,
+      "category": "Category G",
+      "image": "image_url_17.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Product 18",
+      "price": 1800,
+      "category": "Category H",
+      "image": "image_url_18.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Product 19",
+      "price": 1900,
+      "category": "Category I",
+      "image": "image_url_19.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Product 20",
+      "price": 2000,
+      "category": "Category J",
+      "image": "image_url_20.jpg"
+    },
+    {
+      "id": 21,
+      "name": "Product 21",
+      "price": 2100,
+      "category": "Category A",
+      "image": "image_url_21.jpg"
+    },
+    {
+      "id": 22,
+      "name": "Product 22",
+      "price": 2200,
+      "category": "Category B",
+      "image": "image_url_22.jpg"
+    },
+    {
+      "id": 23,
+      "name": "Product 23",
+      "price": 2300,
+      "category": "Category C",
+      "image": "image_url_23.jpg"
+    },
+    {
+      "id": 24,
+      "name": "Product 24",
+      "price": 2400,
+      "category": "Category D",
+      "image": "image_url_24.jpg"
+    },
+    {
+      "id": 25,
+      "name": "Product 25",
+      "price": 2500,
+      "category": "Category E",
+      "image": "image_url_25.jpg"
+    },
+    {
+      "id": 26,
+      "name": "Product 26",
+      "price": 2600,
+      "category": "Category F",
+      "image": "image_url_26.jpg"
+    },
+    {
+      "id": 27,
+      "name": "Product 27",
+      "price": 2700,
+      "category": "Category G",
+      "image": "image_url_27.jpg"
+    },
+    {
+      "id": 28,
+      "name": "Product 28",
+      "price": 2800,
+      "category": "Category H",
+      "image": "image_url_28.jpg"
+    },
+    {
+      "id": 29,
+      "name": "Product 29",
+      "price": 2900,
+      "category": "Category I",
+      "image": "image_url_29.jpg"
+    },
+    {
+      "id": 30,
+      "name": "Product 30",
+      "price": 3000,
+      "category": "Category J",
+      "image": "image_url_30.jpg"
+    }
+  ]
+}
