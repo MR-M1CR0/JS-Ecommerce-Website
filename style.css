@@ -106,6 +106,26 @@ a {
   padding: 1.25rem;
 }
 
+.add-to-cart {
+  width: 50px;
+  /* Adjust width to desired size */
+  height: 50px;
+  /* Adjust height to desired size */
+  border-radius: 50%;
+  /* Make it circular */
+  transition: transform 0.3s ease-in-out;
+  margin-left: 200px;
+}
+
+.add-to-cart:hover {
+  transform: scale(1.1);
+}
+
+.bi-cart-plus:hover {
+  cursor: pointer;
+  color: #fff;
+}
+
 .card:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
@@ -162,7 +182,7 @@ i:hover {
 
 .cart-item {
   display: grid;
-  grid-template-columns: 20% 70%;
+  grid-template-columns: 60px 1fr auto;
   gap: 0.5rem;
   align-items: center;
   margin-top: 1rem;
@@ -176,19 +196,39 @@ i:hover {
 }
 
 .cart-product-title {
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: 1.2rem;
+  text-transform: capitalize;
 }
 
 .cart-item-price {
-  font-weight: 500;
+  font-weight: bold;
+  color: #4CAF50;
+  /* green color */
+}
+
+.quantity-label {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #333;
+  /* dark gray color */
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  /* light gray border */
+  border-radius: 5px;
 }
 
 .cart-remove {
   font-size: 1.5rem;
   color: #f53838;
+  margin-left: 50px;
+  margin-top: 25px;
   cursor: pointer;
-  margin-left: 200px;
+  transition: color 0.3s ease;
+  /* smooth color transition */
 }
 
 .total {
@@ -205,6 +245,8 @@ i:hover {
 
 .total-price {
   margin-left: 0.5rem;
+  font-weight: bold;
+  color: #4CAF50;
 }
 
 .btn-buy {
@@ -233,6 +275,69 @@ i:hover {
   color: black;
   font-size: 2rem;
   cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.product-info {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin-top: 50px;
+  /* Set max width for the overlay */
+  width: 100%;
+  /* Take full width */
+  display: flex;
+  /* Use flexbox for layout */
+  flex-direction: column;
+  /* Stack elements vertically */
+  align-items: center;
+  /* Center elements horizontally */
+  text-align: center;
+  /* Center text */
+}
+
+.product-info h2 {
+  margin-top: 50px;
+}
+
+.product-info p {
+  margin-bottom: 10px;
+}
+
+.product-info button {
+  margin-top: 10px;
+}
+
+.product-img {
+  max-width: 30%;
+  /* Ensure image doesn't overflow */
+  border-radius: 8px;
+  /* Add border radius to the image */
+  margin-bottom: 10px;
+  /* Add some spacing below the image */
+}
+
+.product-info .price {
+  font-weight: bold;
+}
+
+.product-info .price-value {
+  margin-left: 5px;
+  color: #f53838;
 }
 
 input[type="text"]:focus,
