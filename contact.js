@@ -91,11 +91,29 @@ document.addEventListener('DOMContentLoaded', function () {
     validatePasswords.call(confirmPassword);
     validateMessage.call(message);
 
-    // Check if there are any errors
-    let errors = document.getElementsByClassName('error-message');
-    if (errors.length === 0) {
-      // If no errors, display success message
-      alert('Your message has been received. Thank you!');
-    }
+    form.addEventListener('submit', function (event) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Validate form fields
+      validateName.call(name);
+      validateEmail.call(email);
+      validatePasswordLength.call(password);
+      validatePasswords.call(confirmPassword);
+      validateMessage.call(message);
+
+      // Check if there are any errors
+      let errors = document.getElementsByClassName('error-message');
+      if (errors.length === 0) {
+        // If no errors, display success message using SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Your message has been received. Thank you!',
+          showCancelButton: false,
+          confirmButtonColor: '#dc3545', // Red color
+        });
+      }
+    });
   });
 });
