@@ -204,18 +204,7 @@
     </div>
   </section>
   <!-- end footer -->
-
-
   <script src="bootstrap.bundle.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Retrieve cart items from session storage
-      const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
-      // Update cart badge count
-      const cartBadge = document.getElementById('cart-badge');
-      cartBadge.textContent = cartItems.length;
-    });
-  </script>
 </body>
 
 </html>
