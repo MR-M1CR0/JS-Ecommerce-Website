@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 5000);
 
   // Fetch products data
-  fetch('https://fakestoreapi.com/products')
+  fetch('https://json-server-ahmed-mahfouz.vercel.app/products')
     .then((response) => response.json())
     .then((data) => {
       initializeProducts(data);
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           let img = document.createElement('img');
           img.className = 'card-img-top';
-          img.src = product.image;
-          img.alt = product.title;
+          img.src = product.img; // Update image source
+          img.alt = product.name;
           img.style.height = '200px';
           img.style.objectFit = 'fit';
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           let cardTitle = document.createElement('h5');
           cardTitle.className = 'card-title mb-2';
-          cardTitle.textContent = product.title;
+          cardTitle.textContent = product.name; // Update product name
 
           let cardText = document.createElement('p');
           cardText.className = 'card-text';
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           let price = document.createElement('p');
           price.className = 'mt-auto fw-bold text-danger';
-          price.textContent = '$' + product.price.toFixed(2);
+          price.textContent = '$' + product.price.toFixed(2); // Update product price
 
           let addToCartBtn = document.createElement('button');
           addToCartBtn.className = 'btn btn-sm btn-danger add-to-cart p-0';
@@ -135,6 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
               // If the product is not in the cart, add it with quantity 1
               productToAdd.quantity = 1;
+              // Add image source to the product object
+              productToAdd.image = product.img;
               cartItems.push(productToAdd);
             }
 
@@ -154,226 +156,219 @@ document.addEventListener('DOMContentLoaded', function () {
       button.addEventListener('click', () => {
         let category = button.textContent.trim().toLowerCase();
         let filteredProducts;
-        if (category === 'clothes') {
-          filteredProducts = data.filter(
-            (product) =>
-              product.category.toLowerCase() === "men's clothing" ||
-              product.category.toLowerCase() === "women's clothing"
-          );
-        } else if (category === 'accessories') {
-          filteredProducts = data.filter(
-            (product) => product.category.toLowerCase() === 'jewelery'
-          );
-        } else if (category === 'tech') {
-          filteredProducts = data.filter(
-            (product) => product.category.toLowerCase() === 'electronics'
-          );
-        }
-        renderProducts(filteredProducts);
+
+        // Dynamically filter products based on the category button clicked
+        filteredProducts = data.filter(
+          (product) => product.category.toLowerCase() === category
+        );
+
+        renderProducts(filteredProducts); // Render products based on filtered data
       });
     });
-  };
 
-  // Function to scroll to top smoothly
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  // Show or hide back to top button based on scroll position
-  const toggleBackToTopButton = () => {
-    const backToTopBtn = document.getElementById('back-to-top-btn');
-    if (window.scrollY > 300) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
-  };
-
-  // Add event listener for scrolling
-  window.addEventListener('scroll', toggleBackToTopButton);
-
-  // Add event listener for back to top button
-  document
-    .getElementById('back-to-top-btn')
-    .addEventListener('click', scrollToTop);
-
-  const cartIcon = document.getElementById('cart');
-  const cartCloseIcon = document.getElementById('close-cart');
-  const cart = document.querySelector('.cart');
-
-  // Function to toggle cart visibility
-  const toggleCart = () => {
-    cart.classList.toggle('active');
-  };
-
-  // Event listener for cart icon click
-  cartIcon.addEventListener('click', toggleCart);
-
-  // Event listener for cart close icon click
-  cartCloseIcon.addEventListener('click', toggleCart);
-
-  // Function to render the cart
-  const renderCart = () => {
-    let cartContent = document.querySelector('.cart-items');
-    let totalPrice = document.querySelector('.total-price');
-
-    // Clear previous cart items
-    cartContent.innerHTML = '';
-
-    // Render each cart item
-    cartItems.forEach((item) => {
-      let cartItem = document.createElement('div');
-      cartItem.classList.add('cart-item');
-
-      let image = document.createElement('img');
-      image.src = item.image;
-      image.alt = item.title;
-      image.classList.add('cart-item-img');
-
-      let title = document.createElement('h4');
-      title.textContent = item.title;
-      title.classList.add('cart-item-title', 'cart-product-title');
-
-      let price = document.createElement('p');
-      price.textContent = '$' + item.price.toFixed(2);
-      price.classList.add('cart-item-price');
-
-      // Create quantity input
-      let quantityLabel = document.createElement('span');
-      quantityLabel.textContent = 'Quantity:';
-      quantityLabel.classList.add('quantity-label');
-
-      let quantityInput = document.createElement('input');
-      quantityInput.type = 'number';
-      quantityInput.value = item.quantity; // Set initial value
-      quantityInput.min = '1';
-      quantityInput.classList.add('quantity-input');
-      quantityInput.addEventListener('change', () => {
-        updateCartItemQuantity(item.id, parseInt(quantityInput.value));
-        renderCart();
-        updateCartBadge();
-        sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after quantity change
+    // Function to scroll to top smoothly
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
       });
+    };
 
-      // Create remove button
-      let removeButton = document.createElement('i');
-      removeButton.classList.add('bi', 'bi-trash-fill', 'cart-remove');
-      removeButton.setAttribute('data-id', item.id);
-      removeButton.addEventListener('click', () => {
-        removeCartItem(item.id);
-        renderCart();
-        updateCartBadge();
-        sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after removal
-      });
-
-      let quantityContainer = document.createElement('div');
-      quantityContainer.classList.add('cart-item-quantity');
-      quantityContainer.appendChild(quantityLabel);
-      quantityContainer.appendChild(quantityInput);
-
-      cartItem.appendChild(image);
-      cartItem.appendChild(title);
-      cartItem.appendChild(price);
-      cartItem.appendChild(quantityContainer);
-      cartItem.appendChild(removeButton); // Append remove button
-
-      cartContent.appendChild(cartItem);
-    });
-
-    // Calculate and render total price
-    let total = cartItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    totalPrice.textContent = '$' + total.toFixed(2);
-  };
-
-  // Function to remove item from cart
-  const removeCartItem = (itemId) => {
-    cartItems = cartItems.filter((item) => item.id !== itemId);
-  };
-
-  // Function to update quantity of a cart item
-  const updateCartItemQuantity = (itemId, newQuantity) => {
-    let itemToUpdate = cartItems.find((item) => item.id === itemId);
-    if (itemToUpdate) {
-      itemToUpdate.quantity = newQuantity;
-    }
-  };
-
-  // Initialize cart badge
-  cartBadge = document.querySelector('#cart .badge');
-  // Update cart badge count initially
-  updateCartBadge();
-
-  // Render cart initially
-  renderCart();
-
-  // Function to show product information using overlay
-  const showProductInfo = (product) => {
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-
-    const productInfo = document.createElement('div');
-    productInfo.classList.add('product-info');
-
-    const title = document.createElement('h2');
-    title.textContent = product.title;
-
-    const img = document.createElement('img');
-    img.src = product.image;
-    img.alt = product.title;
-    img.classList.add('product-img');
-
-    const description = document.createElement('p');
-    description.textContent = product.description;
-
-    const priceLabel = document.createElement('p');
-    priceLabel.textContent = 'Price:';
-    priceLabel.classList.add('price-label');
-
-    const price = document.createElement('p');
-    price.innerHTML = `<span class="price-text">Price: </span><span class="price-value">$${product.price.toFixed(
-      2
-    )}</span>`;
-    price.classList.add('price');
-
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.textContent = 'Add to Cart';
-    addToCartBtn.classList.add('btn', 'btn-danger', 'add-to-cart-overlay');
-    addToCartBtn.addEventListener('click', (event) => {
-      event.stopPropagation();
-      let productId = product.id;
-      let existingCartItem = cartItems.find(
-        (item) => item.id === parseInt(productId)
-      );
-
-      if (existingCartItem) {
-        existingCartItem.quantity += 1;
+    // Show or hide back to top button based on scroll position
+    const toggleBackToTopButton = () => {
+      const backToTopBtn = document.getElementById('back-to-top-btn');
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'block';
       } else {
-        product.quantity = 1;
-        cartItems.push(product);
+        backToTopBtn.style.display = 'none';
       }
+    };
 
-      updateCartBadge();
-      renderCart();
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    });
+    // Add event listener for scrolling
+    window.addEventListener('scroll', toggleBackToTopButton);
 
-    productInfo.appendChild(title);
-    productInfo.appendChild(img);
-    productInfo.appendChild(description);
-    productInfo.appendChild(price);
-    productInfo.appendChild(addToCartBtn);
+    // Add event listener for back to top button
+    document
+      .getElementById('back-to-top-btn')
+      .addEventListener('click', scrollToTop);
 
-    overlay.appendChild(productInfo);
-    document.body.appendChild(overlay);
+    const cartIcon = document.getElementById('cart');
+    const cartCloseIcon = document.getElementById('close-cart');
+    const cart = document.querySelector('.cart');
 
-    overlay.addEventListener('click', () => {
-      overlay.remove();
-    });
+    // Function to toggle cart visibility
+    const toggleCart = () => {
+      cart.classList.toggle('active');
+    };
+
+    // Event listener for cart icon click
+    cartIcon.addEventListener('click', toggleCart);
+
+    // Event listener for cart close icon click
+    cartCloseIcon.addEventListener('click', toggleCart);
+
+    // Function to render the cart
+    const renderCart = () => {
+      let cartContent = document.querySelector('.cart-items');
+      let totalPrice = document.querySelector('.total-price');
+
+      // Clear previous cart items
+      cartContent.innerHTML = '';
+
+      // Render each cart item
+      cartItems.forEach((item) => {
+        let cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+
+        let image = document.createElement('img');
+        image.src = item.image; // Set image source
+        image.alt = item.name;
+        image.classList.add('cart-item-img');
+
+        let title = document.createElement('h4');
+        title.textContent = item.name;
+        title.classList.add('cart-item-title', 'cart-product-title');
+
+        let price = document.createElement('p');
+        price.textContent = '$' + item.price.toFixed(2);
+        price.classList.add('cart-item-price');
+
+        // Create quantity input
+        let quantityLabel = document.createElement('span');
+        quantityLabel.textContent = 'Quantity:';
+        quantityLabel.classList.add('quantity-label');
+
+        let quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.value = item.quantity; // Set initial value
+        quantityInput.min = '1';
+        quantityInput.classList.add('quantity-input');
+        quantityInput.addEventListener('change', () => {
+          updateCartItemQuantity(item.id, parseInt(quantityInput.value));
+          renderCart();
+          updateCartBadge();
+          sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after quantity change
+        });
+
+        // Create remove button
+        let removeButton = document.createElement('i');
+        removeButton.classList.add('bi', 'bi-trash-fill', 'cart-remove');
+        removeButton.setAttribute('data-id', item.id);
+        removeButton.addEventListener('click', () => {
+          removeCartItem(item.id);
+          renderCart();
+          updateCartBadge();
+          sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after removal
+        });
+
+        let quantityContainer = document.createElement('div');
+        quantityContainer.classList.add('cart-item-quantity');
+        quantityContainer.appendChild(quantityLabel);
+        quantityContainer.appendChild(quantityInput);
+
+        cartItem.appendChild(image);
+        cartItem.appendChild(title);
+        cartItem.appendChild(price);
+        cartItem.appendChild(quantityContainer);
+        cartItem.appendChild(removeButton); // Append remove button
+
+        cartContent.appendChild(cartItem);
+      });
+
+      // Calculate and render total price
+      let total = cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+      totalPrice.textContent = '$' + total.toFixed(2);
+    };
+
+    // Function to remove item from cart
+    const removeCartItem = (itemId) => {
+      cartItems = cartItems.filter((item) => item.id !== itemId);
+    };
+
+    // Function to update quantity of a cart item
+    const updateCartItemQuantity = (itemId, newQuantity) => {
+      let itemToUpdate = cartItems.find((item) => item.id === itemId);
+      if (itemToUpdate) {
+        itemToUpdate.quantity = newQuantity;
+      }
+    };
+
+    // Initialize cart badge
+    cartBadge = document.querySelector('#cart .badge');
+    // Update cart badge count initially
+    updateCartBadge();
+
+    // Render cart initially
+    renderCart();
+
+    // Function to show product information using overlay
+    const showProductInfo = (product) => {
+      const overlay = document.createElement('div');
+      overlay.classList.add('overlay');
+
+      const productInfo = document.createElement('div');
+      productInfo.classList.add('product-info');
+
+      const title = document.createElement('h2');
+      title.textContent = product.title;
+
+      const img = document.createElement('img');
+      img.src = product.img;
+      img.alt = product.name;
+      img.classList.add('product-img');
+
+      const description = document.createElement('p');
+      description.textContent = product.description;
+
+      const priceLabel = document.createElement('p');
+      priceLabel.textContent = 'Price:';
+      priceLabel.classList.add('price-label');
+
+      const price = document.createElement('p');
+      price.innerHTML = `<span class="price-text">Price: </span><span class="price-value">$${product.price.toFixed(
+        2
+      )}</span>`;
+      price.classList.add('price');
+
+      const addToCartBtn = document.createElement('button');
+      addToCartBtn.textContent = 'Add to Cart';
+      addToCartBtn.classList.add('btn', 'btn-danger', 'add-to-cart-overlay');
+      addToCartBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        let productId = product.id;
+        let existingCartItem = cartItems.find(
+          (item) => item.id === parseInt(productId)
+        );
+
+        if (existingCartItem) {
+          existingCartItem.quantity += 1;
+        } else {
+          product.quantity = 1;
+          // Add image source to the product object
+          product.image = product.img;
+          cartItems.push(product);
+        }
+
+        updateCartBadge();
+        renderCart();
+        sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+      });
+
+      productInfo.appendChild(title);
+      productInfo.appendChild(img);
+      productInfo.appendChild(description);
+      productInfo.appendChild(price);
+      productInfo.appendChild(addToCartBtn);
+
+      overlay.appendChild(productInfo);
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click', () => {
+        overlay.remove();
+      });
+    };
   };
 });
