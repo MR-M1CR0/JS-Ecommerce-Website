@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     validatePasswords.call(confirmPassword);
     validateMessage.call(message);
 
+<<<<<<< HEAD
     form.addEventListener('submit', function (event) {
       // Prevent form submission
       event.preventDefault();
@@ -115,5 +116,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
+=======
+    // Check if there are any errors
+    let errors = document.getElementsByClassName('error-message');
+    if (errors.length === 0) {
+      // If no errors, display success message
+      alert('Your message has been received. Thank you!');
+    }
+>>>>>>> 919f0ebcf154475a727c35a7fd953b584dd243e8
   });
 });

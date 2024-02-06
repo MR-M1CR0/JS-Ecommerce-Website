@@ -196,7 +196,11 @@ i:hover {
 }
 
 .cart-product-title {
+<<<<<<< HEAD
   font-size: 1rem;
+=======
+  font-size: 1.2rem;
+>>>>>>> 919f0ebcf154475a727c35a7fd953b584dd243e8
   text-transform: capitalize;
 }
 
