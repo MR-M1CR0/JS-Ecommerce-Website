@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let firstSlideClone = slides[0].cloneNode(true);
   slidesContainer.appendChild(firstSlideClone);
 
-  let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || []; // Retrieve cart items from session storage
+  let cartItems = JSON.parse(localStorage.getItem('cartItems')) || []; // Retrieve cart items from local storage
   let cartBadge; // Declare cartBadge variable
 
   function updateCartBadge() {
@@ -142,7 +142,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             updateCartBadge(); // Update cart badge
             renderCart(); // Render the updated cart
-            sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to local storage
+            // Show SweetAlert confirmation
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              html: '<span style="font-weight: bold; font-size: 18px;">Product added to cart successfully!</span>',
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
         });
       }
@@ -251,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
           updateCartItemQuantity(item.id, parseInt(quantityInput.value));
           renderCart();
           updateCartBadge();
-          sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after quantity change
+          localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to local storage after quantity change
         });
 
         // Create remove button
@@ -262,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
           removeCartItem(item.id);
           renderCart();
           updateCartBadge();
-          sessionStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to session storage after removal
+          localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save cart items to local storage after removal
         });
 
         let quantityContainer = document.createElement('div');
@@ -355,10 +363,17 @@ document.addEventListener('DOMContentLoaded', function () {
           product.image = product.img;
           cartItems.push(product);
         }
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          html: '<span style="font-weight: bold; font-size: 18px;">Product added to cart successfully!</span>',
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
         updateCartBadge();
         renderCart();
-        sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
       });
 
       productInfo.appendChild(title);
