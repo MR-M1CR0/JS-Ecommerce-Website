@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
           img.src = product.img; // Update image source
           img.alt = product.name;
           img.style.height = '200px';
-          img.style.objectFit = 'fit';
+          img.style.objectFit = 'contain';
 
           let cardBody = document.createElement('div');
           cardBody.className =
@@ -157,12 +157,16 @@ document.addEventListener('DOMContentLoaded', function () {
         let category = button.textContent.trim().toLowerCase();
         let filteredProducts;
 
-        // Dynamically filter products based on the category button clicked
-        filteredProducts = data.filter(
-          (product) => product.category.toLowerCase() === category
-        );
-
-        renderProducts(filteredProducts); // Render products based on filtered data
+        if (category === 'all') {
+          // If "All" button is clicked, render all products
+          renderProducts(data);
+        } else {
+          // Filter products based on the category button clicked
+          filteredProducts = data.filter(
+            (product) => product.category.toLowerCase() === category
+          );
+          renderProducts(filteredProducts); // Render products based on filtered data
+        }
       });
     });
 
